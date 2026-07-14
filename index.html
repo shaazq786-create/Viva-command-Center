@@ -511,6 +511,14 @@
             line-height: 1.6;
         }
 
+        .card-meta {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
         /* ==================== BADGE ==================== */
         .badge {
             display: inline-block;
@@ -522,6 +530,151 @@
             font-weight: 600;
             margin-right: 0.5rem;
             margin-bottom: 0.5rem;
+        }
+
+        .badge.success {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .badge.warning {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge.info {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        /* ==================== SEARCH BAR ==================== */
+        .search-container {
+            margin-bottom: 2rem;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 1rem;
+            padding-left: 3rem;
+            font-size: 1rem;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            transition: border-color 0.2s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            pointer-events: none;
+        }
+
+        .search-results {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .result-count {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        /* ==================== CONTENT SECTIONS ==================== */
+        .content-section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #3b82f6;
+        }
+
+        .question-item {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .question-item:hover {
+            background-color: #f0f4ff;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+        }
+
+        .question-type {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .question-text {
+            font-size: 0.95rem;
+            color: #333;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .topic-card {
+            background-color: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .topic-card:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+
+        .topic-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .topic-card-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #1e40af;
+        }
+
+        .topic-card-count {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 0.5rem;
         }
 
         /* ==================== RESPONSIVE DESIGN ==================== */
@@ -540,6 +693,10 @@
 
             h1 {
                 font-size: 2rem;
+            }
+
+            .topic-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             }
         }
 
@@ -586,6 +743,10 @@
 
             h1 {
                 font-size: 1.75rem;
+            }
+
+            .topic-grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
             }
         }
 
@@ -636,6 +797,10 @@
                 flex-direction: column;
                 gap: 0.75rem;
             }
+
+            .topic-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         /* ==================== SCROLLBAR STYLING ==================== */
@@ -669,7 +834,7 @@
             }
         }
 
-        .file-item {
+        .file-item, .card, .question-item {
             animation: slideIn 0.3s ease;
         }
 
@@ -811,32 +976,24 @@
                     <!-- TAB: EXTRACTED CONTENT -->
                     <div class="tab-content" id="extracted">
                         <h2>📑 Extracted Content</h2>
-                        <div class="empty-state">
-                            <div class="empty-state-icon">📊</div>
-                            <div class="empty-state-text">No Content Yet</div>
-                            <div class="empty-state-hint">
-                                Upload PDFs to extract and display questions, topics, and indexed content.
-                            </div>
-                        </div>
+                        <div id="extractedContent"></div>
                     </div>
 
                     <!-- TAB: SEARCH -->
                     <div class="tab-content" id="search">
                         <h2>🔍 Search Knowledge Base</h2>
-                        <input 
-                            type="text" 
-                            id="searchInput" 
-                            placeholder="Search topic, disease, procedure, or keyword..."
-                            style="margin-bottom: 1.5rem; padding: 1rem; font-size: 1rem;"
-                            disabled
-                        />
-                        <div class="empty-state">
-                            <div class="empty-state-icon">🔎</div>
-                            <div class="empty-state-text">Search Disabled</div>
-                            <div class="empty-state-hint">
-                                Upload and process PDFs to enable search functionality.
+                        <div class="search-container">
+                            <div class="search-box">
+                                <span class="search-icon">🔎</span>
+                                <input 
+                                    type="text" 
+                                    id="searchInput" 
+                                    placeholder="Search topic, disease, procedure, or keyword..."
+                                    disabled
+                                />
                             </div>
                         </div>
+                        <div id="searchResults"></div>
                     </div>
                 </div>
             </div>
@@ -844,47 +1001,133 @@
     </div>
 
     <script>
-        // ==================== PHASE 1: CORE STATE & INITIALIZATION ==================== 
+        // ==================== PHASE 2: PDF EXTRACTION & KNOWLEDGE ENGINE ==================== 
+
+        /**
+         * Medical Terminology and Topics Database
+         */
+        const medicalTopics = {
+            'Abdomen': { icon: '🏥', category: 'Anatomy' },
+            'Appendix': { icon: '🔬', category: 'Organ' },
+            'Appendicitis': { icon: '🏥', category: 'Disease' },
+            'Biliary': { icon: '🏥', category: 'System' },
+            'Bleeding': { icon: '⚠️', category: 'Symptom' },
+            'Bowel': { icon: '🔬', category: 'Organ' },
+            'Cancer': { icon: '⚠️', category: 'Disease' },
+            'Cholecystitis': { icon: '🏥', category: 'Disease' },
+            'Choledocholithiasis': { icon: '🏥', category: 'Disease' },
+            'Cirrhosis': { icon: '🏥', category: 'Disease' },
+            'Colitis': { icon: '🏥', category: 'Disease' },
+            'Colorectal': { icon: '🏥', category: 'Organ' },
+            'Complication': { icon: '⚠️', category: 'Concept' },
+            'Crohn': { icon: '🏥', category: 'Disease' },
+            'Cyst': { icon: '🔬', category: 'Lesion' },
+            'Diagnosis': { icon: '📋', category: 'Process' },
+            'Diverticular': { icon: '🏥', category: 'Disease' },
+            'Duodenal': { icon: '🔬', category: 'Organ' },
+            'Examination': { icon: '📋', category: 'Process' },
+            'Fistula': { icon: '🔬', category: 'Lesion' },
+            'Gastrectomy': { icon: '✂️', category: 'Surgery' },
+            'Gastric': { icon: '🔬', category: 'Organ' },
+            'Gastritis': { icon: '🏥', category: 'Disease' },
+            'Hemorrhage': { icon: '⚠️', category: 'Symptom' },
+            'Hernia': { icon: '🏥', category: 'Disease' },
+            'History': { icon: '📋', category: 'Process' },
+            'Imaging': { icon: '📊', category: 'Investigation' },
+            'Incision': { icon: '✂️', category: 'Technique' },
+            'Infection': { icon: '🦠', category: 'Complication' },
+            'Inflammation': { icon: '🔥', category: 'Concept' },
+            'Investigation': { icon: '📊', category: 'Process' },
+            'Inguinal': { icon: '🏥', category: 'Location' },
+            'Intestinal': { icon: '🔬', category: 'Organ' },
+            'Ischemia': { icon: '⚠️', category: 'Symptom' },
+            'Jaundice': { icon: '⚠️', category: 'Symptom' },
+            'Kidney': { icon: '🔬', category: 'Organ' },
+            'Laparoscopy': { icon: '📊', category: 'Investigation' },
+            'Leak': { icon: '⚠️', category: 'Complication' },
+            'Liver': { icon: '🔬', category: 'Organ' },
+            'Management': { icon: '📋', category: 'Process' },
+            'Mesentery': { icon: '🔬', category: 'Anatomy' },
+            'Obstruction': { icon: '🏥', category: 'Disease' },
+            'Oesophagus': { icon: '🔬', category: 'Organ' },
+            'Operation': { icon: '✂️', category: 'Surgery' },
+            'Pancreatitis': { icon: '🏥', category: 'Disease' },
+            'Pancreas': { icon: '🔬', category: 'Organ' },
+            'Pathology': { icon: '🔬', category: 'Process' },
+            'Perforation': { icon: '⚠️', category: 'Complication' },
+            'Peritonitis': { icon: '🏥', category: 'Disease' },
+            'Physiology': { icon: '📚', category: 'Process' },
+            'Portal': { icon: '🔬', category: 'Anatomy' },
+            'Prognosis': { icon: '📊', category: 'Outcome' },
+            'Pylorus': { icon: '🔬', category: 'Anatomy' },
+            'Rectal': { icon: '🔬', category: 'Organ' },
+            'Reflux': { icon: '⚠️', category: 'Symptom' },
+            'Repair': { icon: '✂️', category: 'Surgery' },
+            'Resection': { icon: '✂️', category: 'Surgery' },
+            'Sepsis': { icon: '🏥', category: 'Disease' },
+            'Shock': { icon: '⚠️', category: 'Emergency' },
+            'Spleen': { icon: '🔬', category: 'Organ' },
+            'Stenosis': { icon: '🏥', category: 'Disease' },
+            'Stomach': { icon: '🔬', category: 'Organ' },
+            'Surgery': { icon: '✂️', category: 'Process' },
+            'Suture': { icon: '📋', category: 'Technique' },
+            'Technique': { icon: '📋', category: 'Concept' },
+            'Trauma': { icon: '⚠️', category: 'Emergency' },
+            'Treatment': { icon: '📋', category: 'Process' },
+            'Ulcer': { icon: '🏥', category: 'Disease' },
+            'Umbilical': { icon: '🔬', category: 'Location' },
+            'Vascular': { icon: '🔬', category: 'System' },
+            'Ventral': { icon: '🏥', category: 'Location' },
+            'Wound': { icon: '⚠️', category: 'Complication' }
+        };
+
+        /**
+         * Question Type Patterns
+         */
+        const questionPatterns = {
+            viva: [
+                /^(discuss|explain|what is|define|describe|how do you|list the|enumerate|write short note on|outline)\s+/i,
+                /\?$/
+            ],
+            mcq: [
+                /^(a\)|A\)|1\)|i\)|a\.\)|A\.)/
+            ],
+            essay: [
+                /^(write an essay|discuss in detail|elaborate on|give a detailed account)/i
+            ],
+            shortNote: [
+                /^(short note on|write briefly about|briefly explain)/i
+            ]
+        };
 
         /**
          * Global Application State
-         * Manages PDFs, knowledge base, and session configuration
          */
         const appState = {
-            // PDF Management
-            uploadedFiles: [],          // Array of {name, size, pages, text}
+            uploadedFiles: [],
             booksLoaded: 0,
             totalPages: 0,
             
-            // Knowledge Base
             knowledgeBase: {
-                topics: new Set(),      // Unique topics
-                questions: [],          // Extracted questions
+                topics: new Map(),      // topic -> {count, icon, category}
+                questions: [],          // All extracted questions
                 content: {},            // Topic -> content mapping
-                searchIndex: {}          // Searchable index
+                searchIndex: {},         // Searchable word index
+                allText: '',            // Full searchable text
+                pageReferences: {}      // content -> page numbers
             },
             
-            // Exam Configuration
             examLevel: 'ms',
-            interactionMode: 'text',    // 'text' or 'voice'
+            interactionMode: 'text',
             selectedTopic: null,
             
-            // Status
-            isProcessing: false,
-            pdfWorker: null
+            isProcessing: false
         };
 
-        // ==================== PDF.JS WORKER SETUP ==================== 
-        
-        if (typeof pdfjsLib !== 'undefined') {
-            pdfjsLib.GlobalWorkerOptions.workerSrc = 
-                'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-        }
-
-        // ==================== DOM ELEMENTS ==================== 
-
+        /**
+         * DOM Elements
+         */
         const DOM = {
-            // Upload Elements
             uploadZone: document.getElementById('uploadZone'),
             fileInput: document.getElementById('fileInput'),
             fileList: document.getElementById('fileList'),
@@ -892,46 +1135,33 @@
             progressBar: document.getElementById('progressBar'),
             progressText: document.getElementById('progressText'),
             
-            // Status Elements
             booksLoaded: document.getElementById('booksLoaded'),
             topicsIndexed: document.getElementById('topicsIndexed'),
             questionsExtracted: document.getElementById('questionsExtracted'),
             aiReady: document.getElementById('aiReady'),
             
-            // Control Elements
             examLevel: document.getElementById('examLevel'),
             topicSelect: document.getElementById('topicSelect'),
             startVivaBtn: document.getElementById('startVivaBtn'),
             
-            // Mode Selection
             modeText: document.getElementById('modeText'),
             modeVoice: document.getElementById('modeVoice'),
             
-            // Tab Elements
             tabs: document.querySelectorAll('.tab'),
             tabContents: document.querySelectorAll('.tab-content'),
             
-            // Search
-            searchInput: document.getElementById('searchInput')
+            searchInput: document.getElementById('searchInput'),
+            extractedContent: document.getElementById('extractedContent'),
+            searchResults: document.getElementById('searchResults'),
+            
+            overviewTab: document.getElementById('overview')
         };
 
         // ==================== EVENT LISTENERS ==================== 
 
-        /**
-         * Upload Zone Click Handler
-         */
-        DOM.uploadZone.addEventListener('click', () => {
-            DOM.fileInput.click();
-        });
-
-        /**
-         * File Input Change Handler
-         */
+        DOM.uploadZone.addEventListener('click', () => DOM.fileInput.click());
         DOM.fileInput.addEventListener('change', handleFileSelection);
 
-        /**
-         * Drag & Drop Handlers
-         */
         DOM.uploadZone.addEventListener('dragover', (e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -949,22 +1179,14 @@
             
             const files = Array.from(e.dataTransfer.files).filter(f => f.type === 'application/pdf');
             if (files.length > 0) {
-                DOM.fileInput.files = e.dataTransfer.files;
                 handleFileSelection({ target: { files: e.dataTransfer.files } });
             }
         });
 
-        /**
-         * Exam Level Change Handler
-         */
         DOM.examLevel.addEventListener('change', (e) => {
             appState.examLevel = e.target.value;
-            console.log('Exam Level Changed:', appState.examLevel);
         });
 
-        /**
-         * Mode Selection Handlers
-         */
         DOM.modeText.addEventListener('change', () => {
             appState.interactionMode = 'text';
         });
@@ -973,46 +1195,40 @@
             appState.interactionMode = 'voice';
         });
 
-        /**
-         * Tab Navigation Handler
-         */
         DOM.tabs.forEach(tab => {
             tab.addEventListener('click', (e) => {
-                const tabName = e.target.dataset.tab;
-                
-                // Remove active class from all tabs and contents
                 DOM.tabs.forEach(t => t.classList.remove('active'));
-                DOM.tabContents.forEach(c => c.classList.remove('active'));
-                
-                // Add active class to clicked tab and corresponding content
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
                 e.target.classList.add('active');
-                document.getElementById(tabName).classList.add('active');
+                document.getElementById(e.target.dataset.tab).classList.add('active');
             });
         });
 
-        /**
-         * Start Viva Button Handler
-         */
         DOM.startVivaBtn.addEventListener('click', startViva);
+
+        DOM.searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.trim();
+            if (query.length > 0) {
+                performSearch(query);
+            } else {
+                DOM.searchResults.innerHTML = '';
+            }
+        });
 
         // ==================== FILE HANDLING ==================== 
 
-        /**
-         * Handle File Selection (from input or drag-drop)
-         */
         async function handleFileSelection(event) {
             const files = Array.from(event.target.files);
             
             if (files.length === 0) return;
 
-            // Validate files
             const validFiles = files.filter(file => {
                 if (file.type !== 'application/pdf') {
-                    alert(`❌ ${file.name} is not a PDF. Skipped.`);
+                    alert(`❌ ${file.name} is not a PDF`);
                     return false;
                 }
-                if (file.size > 100 * 1024 * 1024) { // 100MB
-                    alert(`❌ ${file.name} exceeds 100MB. Skipped.`);
+                if (file.size > 100 * 1024 * 1024) {
+                    alert(`❌ ${file.name} exceeds 100MB`);
                     return false;
                 }
                 return true;
@@ -1020,11 +1236,9 @@
 
             if (validFiles.length === 0) return;
 
-            // Add files to state
             appState.uploadedFiles.push(...validFiles);
             updateFileList();
 
-            // Process files
             appState.isProcessing = true;
             DOM.progressContainer.classList.add('active');
             
@@ -1033,14 +1247,11 @@
             appState.isProcessing = false;
             DOM.progressContainer.classList.remove('active');
 
-            // Update UI
             updateKnowledgeStatus();
             enableExamControls();
+            displayExtractedContent();
         }
 
-        /**
-         * Update File List Display
-         */
         function updateFileList() {
             DOM.fileList.innerHTML = '';
             
@@ -1056,9 +1267,6 @@
             });
         }
 
-        /**
-         * Remove File from Upload List
-         */
         function removeFile(index) {
             appState.uploadedFiles.splice(index, 1);
             updateFileList();
@@ -1066,24 +1274,20 @@
             
             if (appState.uploadedFiles.length === 0) {
                 disableExamControls();
+                DOM.extractedContent.innerHTML = '';
+                DOM.overviewTab.classList.add('active');
+                document.getElementById('extracted').classList.remove('active');
             }
         }
 
-        /**
-         * Format File Size for Display
-         */
         function formatFileSize(bytes) {
             if (bytes < 1024) return bytes + ' B';
             if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
             return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
         }
 
-        // ==================== PDF PROCESSING ==================== 
+        // ==================== PDF PROCESSING & TEXT EXTRACTION ==================== 
 
-        /**
-         * Process Uploaded PDF Files
-         * Extracts text, builds knowledge base, and identifies topics
-         */
         async function processPDFFiles(files) {
             const totalFiles = files.length;
             
@@ -1096,17 +1300,13 @@
                     updateProgress(progress);
                 } catch (error) {
                     console.error(`Error processing ${file.name}:`, error);
-                    alert(`⚠️ Error processing ${file.name}: ${error.message}`);
+                    alert(`⚠️ Error processing ${file.name}`);
                 }
             }
 
-            // Index knowledge base
             indexKnowledgeBase();
         }
 
-        /**
-         * Extract Text from PDF using PDF.js
-         */
         async function extractPDFText(file) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -1128,15 +1328,14 @@
                             fullText += `\n--- PAGE ${pageNum} ---\n${pageText}`;
                         }
 
-                        // Store extracted data
-                        appState.uploadedFiles[
-                            appState.uploadedFiles.findIndex(f => f.name === file.name)
-                        ] = {
+                        const fileIndex = appState.uploadedFiles.findIndex(f => f.name === file.name);
+                        appState.uploadedFiles[fileIndex] = {
                             name: file.name,
                             size: file.size,
                             pages: pages,
                             text: fullText,
-                            pageCount: pdf.numPages
+                            pageCount: pdf.numPages,
+                            isProcessed: true
                         };
 
                         appState.booksLoaded++;
@@ -1155,112 +1354,117 @@
             });
         }
 
-        /**
-         * Update Progress Bar
-         */
         function updateProgress(percent) {
             DOM.progressBar.style.width = percent + '%';
             DOM.progressText.textContent = `Processing: ${Math.round(percent)}%`;
         }
 
-        /**
-         * Index Knowledge Base
-         * Builds searchable index from extracted text
-         */
+        // ==================== KNOWLEDGE BASE INDEXING & QUESTION EXTRACTION ==================== 
+
         function indexKnowledgeBase() {
             appState.knowledgeBase.topics.clear();
+            appState.knowledgeBase.questions = [];
             appState.knowledgeBase.searchIndex = {};
+            appState.knowledgeBase.allText = '';
 
-            // Common medical topics for indexing
-            const commonTopics = [
-                'Abdomen', 'Appendix', 'Appendicitis', 'Biliary', 'Bleeding', 'Bowel',
-                'Cancer', 'Cholecystitis', 'Choledocholithiasis', 'Cirrhosis', 'Colitis',
-                'Colorectal', 'Complication', 'Consent', 'Crohn', 'Cyst', 'Diagnosis',
-                'Diverticular', 'Duodenal', 'Examination', 'Fistula', 'Gastrectomy',
-                'Gastric', 'Gastritis', 'Hemorrhage', 'Hernia', 'Hiatus', 'History',
-                'Imaging', 'Incision', 'Infection', 'Inflammation', 'Investigation',
-                'Inguinal', 'Intestinal', 'Ischemia', 'Jaundice', 'Kidney', 'Laparoscopy',
-                'Leak', 'Liver', 'Management', 'Mesentery', 'Obstruction', 'Oesophagus',
-                'Operation', 'Pancreatitis', 'Pancreas', 'Pathology', 'Perforation',
-                'Peritonitis', 'Physiology', 'Portal', 'Prognosis', 'Pylorus', 'Rectal',
-                'Reflux', 'Repair', 'Resection', 'Sepsis', 'Shock', 'Spleen', 'Stenosis',
-                'Stomach', 'Surgery', 'Suture', 'Technique', 'Trauma', 'Treatment',
-                'Ulcer', 'Umbilical', 'Vascular', 'Ventral', 'Wound'
-            ];
-
-            // Extract topics and build index
+            // Process each file
             appState.uploadedFiles.forEach(file => {
-                if (!file.text) return;
+                if (!file.isProcessed || !file.text) return;
 
-                const text = file.text.toLowerCase();
-                
-                // Find mentioned topics
-                commonTopics.forEach(topic => {
-                    if (text.includes(topic.toLowerCase())) {
-                        appState.knowledgeBase.topics.add(topic);
-                    }
-                });
+                // Aggregate all text
+                appState.knowledgeBase.allText += '\n' + file.text;
+
+                // Extract topics
+                extractTopicsFromText(file.text, file.name);
+
+                // Extract questions
+                extractQuestionsFromText(file.text, file.name);
 
                 // Build search index
-                const words = text.split(/\s+/).filter(w => w.length > 3);
-                words.forEach(word => {
-                    const clean = word.toLowerCase().replace(/[^a-z0-9]/g, '');
-                    if (!appState.knowledgeBase.searchIndex[clean]) {
-                        appState.knowledgeBase.searchIndex[clean] = [];
-                    }
-                    if (!appState.knowledgeBase.searchIndex[clean].includes(file.name)) {
-                        appState.knowledgeBase.searchIndex[clean].push(file.name);
-                    }
-                });
+                buildSearchIndex(file.text);
             });
 
-            // Extract sample questions (Phase 2 will do this properly)
-            extractSampleQuestions();
+            // Deduplicate and sort questions
+            appState.knowledgeBase.questions = Array.from(
+                new Map(appState.knowledgeBase.questions.map(q => [q.text, q])).values()
+            );
+
+            console.log('Knowledge Base Indexed:', {
+                topics: appState.knowledgeBase.topics.size,
+                questions: appState.knowledgeBase.questions.length,
+                books: appState.booksLoaded
+            });
         }
 
-        /**
-         * Extract Sample Questions from Text
-         * Phase 2 will implement proper question extraction
-         */
-        function extractSampleQuestions() {
-            const questions = [];
+        function extractTopicsFromText(text, bookName) {
+            const lowerText = text.toLowerCase();
             
-            appState.uploadedFiles.forEach(file => {
-                if (!file.text) return;
-
-                // Simple pattern matching for common question formats
-                const patterns = [
-                    /(?:Q\d+|Question\d+|Q\.|Q:)\s*([^?\n]+\?)/gi,
-                    /(?:Discuss|Explain|Define|What is)\s+([^?\n]+\?)/gi,
-                    /(?:Short note on|Describe)\s+([^?\n]+)/gi
-                ];
-
-                patterns.forEach(pattern => {
-                    let match;
-                    while ((match = pattern.exec(file.text)) !== null) {
-                        const question = match[1].trim();
-                        if (question.length > 10 && question.length < 200) {
-                            questions.push({
-                                text: question,
-                                book: file.name,
-                                type: 'viva'
-                            });
-                        }
+            Object.entries(medicalTopics).forEach(([topic, data]) => {
+                if (lowerText.includes(topic.toLowerCase())) {
+                    if (!appState.knowledgeBase.topics.has(topic)) {
+                        appState.knowledgeBase.topics.set(topic, {
+                            count: 0,
+                            icon: data.icon,
+                            category: data.category,
+                            books: []
+                        });
                     }
-                });
+                    
+                    const topicData = appState.knowledgeBase.topics.get(topic);
+                    topicData.count++;
+                    if (!topicData.books.includes(bookName)) {
+                        topicData.books.push(bookName);
+                    }
+                }
             });
+        }
 
-            // Remove duplicates
-            appState.knowledgeBase.questions = Array.from(
-                new Map(questions.map(q => [q.text, q])).values()
-            ).slice(0, 100); // Limit to 100 for now
+        function extractQuestionsFromText(text, bookName) {
+            const sentences = text.match(/[^.!?]*[.!?]+/g) || [];
+            
+            sentences.forEach((sentence, index) => {
+                const trimmed = sentence.trim();
+                
+                // Identify question type
+                let type = 'viva';
+                if (trimmed.match(/^\d+\.\s*[a-d]\)|^\([a-d]\)/)) {
+                    type = 'mcq';
+                } else if (trimmed.match(/^(write an essay|discuss in detail)/i)) {
+                    type = 'essay';
+                } else if (trimmed.match(/^(short note|briefly)/i)) {
+                    type = 'shortNote';
+                }
+
+                // Check if sentence looks like a question
+                if (trimmed.match(/\?$|^(discuss|explain|what|how|why|when|where|name|list|enumerate|define)\s/i)) {
+                    if (trimmed.length > 15 && trimmed.length < 300) {
+                        appState.knowledgeBase.questions.push({
+                            text: trimmed,
+                            type: type,
+                            book: bookName,
+                            pageIndex: Math.floor(index / 10)
+                        });
+                    }
+                }
+            });
+        }
+
+        function buildSearchIndex(text) {
+            const words = text.split(/\s+/);
+            
+            words.forEach(word => {
+                const clean = word.toLowerCase().replace(/[^a-z0-9]/g, '');
+                if (clean.length > 3) {
+                    if (!appState.knowledgeBase.searchIndex[clean]) {
+                        appState.knowledgeBase.searchIndex[clean] = 0;
+                    }
+                    appState.knowledgeBase.searchIndex[clean]++;
+                }
+            });
         }
 
         // ==================== UI STATE MANAGEMENT ==================== 
 
-        /**
-         * Update Knowledge Status Display
-         */
         function updateKnowledgeStatus() {
             DOM.booksLoaded.textContent = appState.booksLoaded;
             DOM.topicsIndexed.textContent = appState.knowledgeBase.topics.size;
@@ -1269,71 +1473,215 @@
             const isReady = appState.booksLoaded > 0 && appState.knowledgeBase.questions.length > 0;
             DOM.aiReady.textContent = isReady ? '✓' : '✗';
             DOM.aiReady.style.color = isReady ? '#16a34a' : '#999';
+            DOM.aiReady.parentElement.style.color = isReady ? '#16a34a' : '#999';
         }
 
-        /**
-         * Enable Exam Controls
-         */
         function enableExamControls() {
             DOM.topicSelect.disabled = false;
             DOM.startVivaBtn.disabled = false;
             DOM.searchInput.disabled = false;
             
-            // Populate topic suggestions
-            const topics = Array.from(appState.knowledgeBase.topics).sort();
-            DOM.topicSelect.placeholder = `e.g., ${topics.slice(0, 3).join(', ')}...`;
+            const topics = Array.from(appState.knowledgeBase.topics.keys()).slice(0, 5);
+            DOM.topicSelect.placeholder = `e.g., ${topics.join(', ')}...`;
         }
 
-        /**
-         * Disable Exam Controls
-         */
         function disableExamControls() {
             DOM.topicSelect.disabled = true;
             DOM.startVivaBtn.disabled = true;
             DOM.searchInput.disabled = true;
         }
 
-        // ==================== VIVA START HANDLER ==================== 
+        // ==================== DISPLAY EXTRACTED CONTENT ==================== 
 
-        /**
-         * Start Viva Session
-         * Phase 2 will implement full viva engine
-         */
+        function displayExtractedContent() {
+            let html = '';
+
+            // Topics Section
+            if (appState.knowledgeBase.topics.size > 0) {
+                html += '<div class="content-section">';
+                html += '<div class="section-title">📌 Indexed Topics</div>';
+                html += '<div class="topic-grid">';
+                
+                Array.from(appState.knowledgeBase.topics.entries())
+                    .sort((a, b) => b[1].count - a[1].count)
+                    .slice(0, 20)
+                    .forEach(([topic, data]) => {
+                        html += `
+                            <div class="topic-card">
+                                <div class="topic-card-icon">${data.icon}</div>
+                                <div class="topic-card-name">${topic}</div>
+                                <div class="topic-card-count">${data.count} mentions</div>
+                            </div>
+                        `;
+                    });
+                
+                html += '</div></div>';
+            }
+
+            // Questions Section
+            if (appState.knowledgeBase.questions.length > 0) {
+                html += '<div class="content-section">';
+                html += `<div class="section-title">❓ Extracted Questions (${appState.knowledgeBase.questions.length})</div>`;
+                
+                // Group by type
+                const questionsByType = {};
+                appState.knowledgeBase.questions.forEach(q => {
+                    if (!questionsByType[q.type]) {
+                        questionsByType[q.type] = [];
+                    }
+                    questionsByType[q.type].push(q);
+                });
+
+                Object.entries(questionsByType).forEach(([type, questions]) => {
+                    const typeLabel = {
+                        'viva': '🎓 Viva Questions',
+                        'mcq': '📝 MCQ',
+                        'essay': '📄 Essay',
+                        'shortNote': '📋 Short Notes'
+                    }[type] || type;
+
+                    html += `<div style="margin-bottom: 2rem;">`;
+                    html += `<h3 style="margin-bottom: 1rem; color: #1e40af;">${typeLabel}</h3>`;
+                    
+                    questions.slice(0, 10).forEach(q => {
+                        html += `
+                            <div class="question-item">
+                                <div class="question-type">${type}</div>
+                                <div class="question-text">${escapeHtml(q.text)}</div>
+                                <div class="card-meta">📚 ${q.book}</div>
+                            </div>
+                        `;
+                    });
+
+                    if (questions.length > 10) {
+                        html += `<p style="color: #999; font-size: 0.9rem; margin-top: 1rem;">... and ${questions.length - 10} more questions</p>`;
+                    }
+
+                    html += '</div>';
+                });
+
+                html += '</div>';
+            }
+
+            DOM.extractedContent.innerHTML = html || '<p style="text-align: center; color: #999;">No content extracted</p>';
+        }
+
+        // ==================== SEARCH FUNCTIONALITY ==================== 
+
+        function performSearch(query) {
+            const lowerQuery = query.toLowerCase();
+            const results = [];
+
+            // Search in questions
+            appState.knowledgeBase.questions.forEach(q => {
+                if (q.text.toLowerCase().includes(lowerQuery)) {
+                    results.push({
+                        type: 'question',
+                        text: q.text,
+                        meta: `${q.type} • ${q.book}`,
+                        relevance: 1
+                    });
+                }
+            });
+
+            // Search in topics
+            appState.knowledgeBase.topics.forEach((data, topic) => {
+                if (topic.toLowerCase().includes(lowerQuery)) {
+                    results.push({
+                        type: 'topic',
+                        text: topic,
+                        icon: data.icon,
+                        meta: `${data.count} mentions • ${data.books.join(', ')}`,
+                        relevance: 0.9
+                    });
+                }
+            });
+
+            // Search in full text (limited)
+            const textMatches = appState.knowledgeBase.allText.toLowerCase().split('\n')
+                .filter(line => line.toLowerCase().includes(lowerQuery))
+                .slice(0, 5);
+
+            textMatches.forEach(match => {
+                if (match.length > 20 && match.length < 200) {
+                    results.push({
+                        type: 'text',
+                        text: match.trim(),
+                        meta: 'From PDFs',
+                        relevance: 0.7
+                    });
+                }
+            });
+
+            displaySearchResults(results, query);
+        }
+
+        function displaySearchResults(results, query) {
+            if (results.length === 0) {
+                DOM.searchResults.innerHTML = '<div class="empty-state"><p>No results found for "' + escapeHtml(query) + '"</p></div>';
+                return;
+            }
+
+            let html = `<div class="result-count">Found ${results.length} result(s)</div>`;
+            
+            results.forEach((result, index) => {
+                if (result.type === 'topic') {
+                    html += `
+                        <div class="card">
+                            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">${result.icon}</div>
+                            <div class="card-title">${escapeHtml(result.text)}</div>
+                            <div class="card-meta">${escapeHtml(result.meta)}</div>
+                        </div>
+                    `;
+                } else {
+                    html += `
+                        <div class="card">
+                            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                <span class="badge">${result.type}</span>
+                            </div>
+                            <div class="card-text">${escapeHtml(result.text)}</div>
+                            <div class="card-meta">${escapeHtml(result.meta)}</div>
+                        </div>
+                    `;
+                }
+            });
+
+            DOM.searchResults.innerHTML = html;
+        }
+
+        // ==================== UTILITY FUNCTIONS ==================== 
+
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+
         function startViva() {
             const topic = DOM.topicSelect.value || 'General Surgery';
             const level = appState.examLevel;
             const mode = appState.interactionMode;
 
-            console.log('Starting Viva:', {
-                topic,
-                level,
-                mode,
-                books: appState.booksLoaded,
-                questions: appState.knowledgeBase.questions.length
-            });
-
-            alert(`✅ Viva Session Starting!\n\n📚 Topic: ${topic}\n📊 Level: ${level}\n🎤 Mode: ${mode}\n\nPhase 2 will add the full viva engine.`);
+            alert(`✅ Viva Session Starting!\n\n📚 Topic: ${topic}\n📊 Level: ${level}\n🎤 Mode: ${mode}\n\nPhase 3 will add the AI integration.`);
         }
 
         // ==================== INITIALIZATION ==================== 
 
-        /**
-         * Initialize Application
-         */
+        if (typeof pdfjsLib !== 'undefined') {
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 
+                'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        }
+
         function initializeApp() {
-            console.log('🏥 AI Medical Viva Tutor - Phase 1 Initialized');
-            console.log('Features:', {
-                pdfUpload: '✓',
-                dragDrop: '✓',
-                knowledgeBase: '✓ (Basic)',
-                examControls: '✓',
-                responsiveUI: '✓'
-            });
-            
+            console.log('🏥 Phase 2 Initialized: PDF Extraction & Knowledge Engine');
             disableExamControls();
         }
 
-        // Run initialization when DOM is ready
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initializeApp);
         } else {

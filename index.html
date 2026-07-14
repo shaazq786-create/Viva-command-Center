@@ -75,6 +75,9 @@
             padding: 2rem;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             flex-shrink: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         header h1 {
@@ -83,6 +86,7 @@
             display: flex;
             align-items: center;
             gap: 0.75rem;
+            margin: 0;
         }
 
         header h1::before {
@@ -94,6 +98,49 @@
             color: rgba(255, 255, 255, 0.9);
             margin-top: 0.5rem;
             font-size: 0.95rem;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .api-key-input {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            width: 250px;
+        }
+
+        .api-key-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .api-key-input:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.6);
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-badge.ready {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .status-badge.pending {
+            background-color: #fef3c7;
+            color: #92400e;
         }
 
         /* ==================== MAIN CONTENT ==================== */
@@ -389,6 +436,10 @@
             background-color: #f3f4f6;
             color: #333;
             border: 1px solid #d1d5db;
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            width: auto;
+            margin: 0;
         }
 
         .btn-secondary:hover {
@@ -399,6 +450,10 @@
             background-color: #fee2e2;
             color: #991b1b;
             border: 1px solid #fecaca;
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            width: auto;
+            margin: 0;
         }
 
         .btn-danger:hover {
@@ -447,7 +502,178 @@
             max-width: 400px;
         }
 
-        /* ==================== TABS ==================== */
+        /* ==================== VIVA SESSION INTERFACE ==================== */
+        .viva-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .viva-header {
+            background-color: #f0f4ff;
+            padding: 1.5rem;
+            border-bottom: 2px solid #3b82f6;
+            margin-bottom: 1rem;
+        }
+
+        .viva-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+        }
+
+        .viva-info {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .viva-info span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .conversation {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            animation: slideIn 0.3s ease;
+        }
+
+        .message.examiner {
+            background-color: #dbeafe;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .message.student {
+            background-color: #dcfce7;
+            border-left: 4px solid #16a34a;
+        }
+
+        .message-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            opacity: 0.7;
+        }
+
+        .message-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .message-meta {
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+            opacity: 0.6;
+        }
+
+        .input-section {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-end;
+        }
+
+        .input-group {
+            flex: 1;
+        }
+
+        .input-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #d1d5db;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            resize: vertical;
+            min-height: 60px;
+            max-height: 150px;
+        }
+
+        .input-group textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-end-viva {
+            background-color: #fee2e2;
+            color: #991b1b;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .btn-end-viva:hover {
+            background-color: #fecaca;
+        }
+
+        .loading {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #3b82f6;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         .tabs {
             display: flex;
             gap: 1rem;
@@ -484,7 +710,7 @@
             display: block;
         }
 
-        /* ==================== CARDS ==================== */
+        /* ==================== CARDS & BADGES ==================== */
         .card {
             background-color: white;
             border: 1px solid #e5e7eb;
@@ -511,15 +737,6 @@
             line-height: 1.6;
         }
 
-        .card-meta {
-            font-size: 0.8rem;
-            color: #999;
-            margin-top: 0.75rem;
-            padding-top: 0.75rem;
-            border-top: 1px solid #e5e7eb;
-        }
-
-        /* ==================== BADGE ==================== */
         .badge {
             display: inline-block;
             background-color: #dbeafe;
@@ -542,141 +759,6 @@
             color: #92400e;
         }
 
-        .badge.info {
-            background-color: #dbeafe;
-            color: #1e40af;
-        }
-
-        /* ==================== SEARCH BAR ==================== */
-        .search-container {
-            margin-bottom: 2rem;
-        }
-
-        .search-box {
-            position: relative;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 1rem;
-            padding-left: 3rem;
-            font-size: 1rem;
-            border: 2px solid #d1d5db;
-            border-radius: 8px;
-            transition: border-color 0.2s ease;
-        }
-
-        .search-box input:focus {
-            outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #999;
-            pointer-events: none;
-        }
-
-        .search-results {
-            display: grid;
-            gap: 1rem;
-        }
-
-        .result-count {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 1rem;
-            padding: 1rem;
-            background-color: #f8f9fa;
-            border-radius: 6px;
-        }
-
-        /* ==================== CONTENT SECTIONS ==================== */
-        .content-section {
-            margin-bottom: 2rem;
-        }
-
-        .section-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #1e40af;
-            margin-bottom: 1rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 2px solid #3b82f6;
-        }
-
-        .question-item {
-            background-color: #f8f9fa;
-            border-left: 4px solid #3b82f6;
-            padding: 1rem;
-            margin-bottom: 0.75rem;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .question-item:hover {
-            background-color: #f0f4ff;
-            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
-        }
-
-        .question-type {
-            display: inline-block;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-        }
-
-        .question-text {
-            font-size: 0.95rem;
-            color: #333;
-            font-weight: 500;
-            line-height: 1.5;
-        }
-
-        .topic-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-
-        .topic-card {
-            background-color: white;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.2s ease;
-            cursor: pointer;
-        }
-
-        .topic-card:hover {
-            border-color: #3b82f6;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
-        }
-
-        .topic-card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .topic-card-name {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #1e40af;
-        }
-
-        .topic-card-count {
-            font-size: 0.8rem;
-            color: #999;
-            margin-top: 0.5rem;
-        }
-
         /* ==================== RESPONSIVE DESIGN ==================== */
         @media (max-width: 1024px) {
             .main-content {
@@ -694,15 +776,22 @@
             h1 {
                 font-size: 2rem;
             }
-
-            .topic-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            }
         }
 
         @media (max-width: 768px) {
             header {
                 padding: 1.5rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header-right {
+                width: 100%;
+                margin-top: 1rem;
+            }
+
+            .api-key-input {
+                width: 100%;
             }
 
             header h1 {
@@ -714,39 +803,20 @@
                 padding: 1rem;
             }
 
-            .sidebar-section {
-                margin-bottom: 1.5rem;
-                padding-bottom: 1rem;
-            }
-
             .workspace-header, .workspace-body {
                 padding: 1rem;
             }
 
-            .tabs {
-                gap: 0.5rem;
-                margin-bottom: 1rem;
+            .input-section {
+                flex-direction: column;
             }
 
-            .tab {
-                padding: 0.75rem 1rem;
-                font-size: 0.85rem;
+            .button-group {
+                width: 100%;
             }
 
-            .upload-zone {
-                padding: 1.5rem;
-            }
-
-            .upload-zone-icon {
-                font-size: 2rem;
-            }
-
-            h1 {
-                font-size: 1.75rem;
-            }
-
-            .topic-grid {
-                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            .btn-submit, .btn-end-viva {
+                flex: 1;
             }
         }
 
@@ -764,46 +834,34 @@
                 font-size: 1.5rem;
             }
 
-            .main-content {
-                flex-direction: column;
-                height: auto;
+            .api-key-input {
+                font-size: 0.75rem;
             }
 
             .sidebar {
                 width: 100%;
                 max-height: none;
                 padding: 1rem;
-                border-bottom: 1px solid #e5e7eb;
             }
 
             .workspace {
                 min-height: 50vh;
             }
 
-            .upload-zone {
-                padding: 1.25rem;
-            }
-
-            button {
-                padding: 0.65rem 1rem;
-                font-size: 0.9rem;
-            }
-
-            .btn-primary {
-                padding: 0.85rem;
-            }
-
-            .radio-group {
+            .input-section {
                 flex-direction: column;
-                gap: 0.75rem;
             }
 
-            .topic-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .button-group {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .btn-submit, .btn-end-viva {
+                width: 100%;
             }
         }
 
-        /* ==================== SCROLLBAR STYLING ==================== */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
@@ -822,7 +880,6 @@
             background-color: #94a3b8;
         }
 
-        /* ==================== ANIMATIONS ==================== */
         @keyframes slideIn {
             from {
                 opacity: 0;
@@ -834,11 +891,10 @@
             }
         }
 
-        .file-item, .card, .question-item {
+        .file-item, .card, .message {
             animation: slideIn 0.3s ease;
         }
 
-        /* ==================== UTILITIES ==================== */
         .mt-1 { margin-top: 0.5rem; }
         .mt-2 { margin-top: 1rem; }
         .mb-1 { margin-bottom: 0.5rem; }
@@ -855,8 +911,19 @@
     <div class="container">
         <!-- ==================== HEADER ==================== -->
         <header>
-            <h1>AI Medical Viva Tutor</h1>
-            <p>Master MS General Surgery with Interactive PDF-Based Viva Preparation</p>
+            <div>
+                <h1>AI Medical Viva Tutor</h1>
+                <p>Master MS General Surgery with Interactive PDF-Based Viva Preparation</p>
+            </div>
+            <div class="header-right">
+                <input 
+                    type="password" 
+                    id="apiKeyInput" 
+                    class="api-key-input" 
+                    placeholder="Paste Claude API Key..."
+                />
+                <div class="status-badge pending" id="apiStatus">No API Key</div>
+            </div>
         </header>
 
         <!-- ==================== MAIN CONTENT ==================== -->
@@ -875,10 +942,8 @@
 
                     <input type="file" id="fileInput" multiple accept=".pdf" />
 
-                    <!-- UPLOADED FILES LIST -->
                     <div class="file-list" id="fileList"></div>
 
-                    <!-- UPLOAD PROGRESS -->
                     <div class="progress-container" id="progressContainer">
                         <div class="progress-bar-wrapper">
                             <div class="progress-bar" id="progressBar"></div>
@@ -955,8 +1020,8 @@
                 <div class="workspace-header">
                     <div class="tabs">
                         <button class="tab active" data-tab="overview">Overview</button>
-                        <button class="tab" data-tab="extracted">Extracted Content</button>
-                        <button class="tab" data-tab="search">Search PDFs</button>
+                        <button class="tab" data-tab="viva">Viva Session</button>
+                        <button class="tab" data-tab="extracted">Content Library</button>
                     </div>
                 </div>
 
@@ -967,33 +1032,23 @@
                             <div class="empty-state-icon">📖</div>
                             <div class="empty-state-text">Ready to Start</div>
                             <div class="empty-state-hint">
-                                Upload PDF textbooks (Bailey, SRB, Sabiston, Schwartz, Lecture Notes) to begin. 
-                                The app will extract questions and prepare for interactive viva sessions.
+                                1. Paste your Claude API Key in the header<br>
+                                2. Upload PDF textbooks<br>
+                                3. Select difficulty level & topic<br>
+                                4. Click "Start Viva" to begin AI-powered exam
                             </div>
                         </div>
+                    </div>
+
+                    <!-- TAB: VIVA SESSION -->
+                    <div class="tab-content" id="viva">
+                        <div id="vivaContent"></div>
                     </div>
 
                     <!-- TAB: EXTRACTED CONTENT -->
                     <div class="tab-content" id="extracted">
-                        <h2>📑 Extracted Content</h2>
+                        <h2>📑 Content Library</h2>
                         <div id="extractedContent"></div>
-                    </div>
-
-                    <!-- TAB: SEARCH -->
-                    <div class="tab-content" id="search">
-                        <h2>🔍 Search Knowledge Base</h2>
-                        <div class="search-container">
-                            <div class="search-box">
-                                <span class="search-icon">🔎</span>
-                                <input 
-                                    type="text" 
-                                    id="searchInput" 
-                                    placeholder="Search topic, disease, procedure, or keyword..."
-                                    disabled
-                                />
-                            </div>
-                        </div>
-                        <div id="searchResults"></div>
                     </div>
                 </div>
             </div>
@@ -1001,27 +1056,49 @@
     </div>
 
     <script>
-        // ==================== PHASE 2: PDF EXTRACTION & KNOWLEDGE ENGINE ==================== 
+        // ==================== PHASE 3: AI INTEGRATION WITH CLAUDE API ==================== 
 
         /**
-         * Medical Terminology and Topics Database
+         * Configuration & API Settings
+         */
+        const CONFIG = {
+            CLAUDE_API_URL: 'https://api.anthropic.com/v1/messages',
+            MODEL: 'claude-3-5-sonnet-20241022',
+            MAX_TOKENS: 2048,
+            SYSTEM_PROMPT_TEMPLATE: `You are an experienced MS General Surgery professor and examiner conducting a university viva examination. Your role is to:
+
+1. Ask ONE question at a time from the uploaded medical textbooks
+2. Evaluate student answers based on correctness, completeness, and clinical reasoning
+3. Provide constructive feedback and detailed explanations
+4. Ask follow-up questions to probe deeper understanding
+5. ONLY use information from the uploaded PDFs - never hallucinate or use external knowledge
+6. Structure explanations with: Definition → Etiology → Classification → Pathophysiology → Clinical Features → Investigations → Management → Complications
+7. Include relevant examples when supported by the materials
+8. Provide marks/feedback on answer quality (Excellent/Good/Fair/Needs Improvement)
+
+Topic: {TOPIC}
+Difficulty Level: {LEVEL}
+Current Questions Asked: {QUESTION_COUNT}
+
+Uploaded PDFs Content Summary:
+{PDF_CONTEXT}
+
+Remember: This is a medical viva exam. Be professional, supportive, but rigorous in evaluation.`
+        };
+
+        /**
+         * Medical Topics Database
          */
         const medicalTopics = {
             'Abdomen': { icon: '🏥', category: 'Anatomy' },
-            'Appendix': { icon: '🔬', category: 'Organ' },
             'Appendicitis': { icon: '🏥', category: 'Disease' },
             'Biliary': { icon: '🏥', category: 'System' },
-            'Bleeding': { icon: '⚠️', category: 'Symptom' },
-            'Bowel': { icon: '🔬', category: 'Organ' },
-            'Cancer': { icon: '⚠️', category: 'Disease' },
             'Cholecystitis': { icon: '🏥', category: 'Disease' },
             'Choledocholithiasis': { icon: '🏥', category: 'Disease' },
             'Cirrhosis': { icon: '🏥', category: 'Disease' },
             'Colitis': { icon: '🏥', category: 'Disease' },
             'Colorectal': { icon: '🏥', category: 'Organ' },
-            'Complication': { icon: '⚠️', category: 'Concept' },
             'Crohn': { icon: '🏥', category: 'Disease' },
-            'Cyst': { icon: '🔬', category: 'Lesion' },
             'Diagnosis': { icon: '📋', category: 'Process' },
             'Diverticular': { icon: '🏥', category: 'Disease' },
             'Duodenal': { icon: '🔬', category: 'Organ' },
@@ -1032,22 +1109,13 @@
             'Gastritis': { icon: '🏥', category: 'Disease' },
             'Hemorrhage': { icon: '⚠️', category: 'Symptom' },
             'Hernia': { icon: '🏥', category: 'Disease' },
-            'History': { icon: '📋', category: 'Process' },
-            'Imaging': { icon: '📊', category: 'Investigation' },
-            'Incision': { icon: '✂️', category: 'Technique' },
-            'Infection': { icon: '🦠', category: 'Complication' },
-            'Inflammation': { icon: '🔥', category: 'Concept' },
-            'Investigation': { icon: '📊', category: 'Process' },
             'Inguinal': { icon: '🏥', category: 'Location' },
             'Intestinal': { icon: '🔬', category: 'Organ' },
-            'Ischemia': { icon: '⚠️', category: 'Symptom' },
             'Jaundice': { icon: '⚠️', category: 'Symptom' },
             'Kidney': { icon: '🔬', category: 'Organ' },
             'Laparoscopy': { icon: '📊', category: 'Investigation' },
-            'Leak': { icon: '⚠️', category: 'Complication' },
             'Liver': { icon: '🔬', category: 'Organ' },
             'Management': { icon: '📋', category: 'Process' },
-            'Mesentery': { icon: '🔬', category: 'Anatomy' },
             'Obstruction': { icon: '🏥', category: 'Disease' },
             'Oesophagus': { icon: '🔬', category: 'Organ' },
             'Operation': { icon: '✂️', category: 'Surgery' },
@@ -1056,11 +1124,6 @@
             'Pathology': { icon: '🔬', category: 'Process' },
             'Perforation': { icon: '⚠️', category: 'Complication' },
             'Peritonitis': { icon: '🏥', category: 'Disease' },
-            'Physiology': { icon: '📚', category: 'Process' },
-            'Portal': { icon: '🔬', category: 'Anatomy' },
-            'Prognosis': { icon: '📊', category: 'Outcome' },
-            'Pylorus': { icon: '🔬', category: 'Anatomy' },
-            'Rectal': { icon: '🔬', category: 'Organ' },
             'Reflux': { icon: '⚠️', category: 'Symptom' },
             'Repair': { icon: '✂️', category: 'Surgery' },
             'Resection': { icon: '✂️', category: 'Surgery' },
@@ -1070,34 +1133,12 @@
             'Stenosis': { icon: '🏥', category: 'Disease' },
             'Stomach': { icon: '🔬', category: 'Organ' },
             'Surgery': { icon: '✂️', category: 'Process' },
-            'Suture': { icon: '📋', category: 'Technique' },
-            'Technique': { icon: '📋', category: 'Concept' },
             'Trauma': { icon: '⚠️', category: 'Emergency' },
             'Treatment': { icon: '📋', category: 'Process' },
             'Ulcer': { icon: '🏥', category: 'Disease' },
             'Umbilical': { icon: '🔬', category: 'Location' },
             'Vascular': { icon: '🔬', category: 'System' },
-            'Ventral': { icon: '🏥', category: 'Location' },
             'Wound': { icon: '⚠️', category: 'Complication' }
-        };
-
-        /**
-         * Question Type Patterns
-         */
-        const questionPatterns = {
-            viva: [
-                /^(discuss|explain|what is|define|describe|how do you|list the|enumerate|write short note on|outline)\s+/i,
-                /\?$/
-            ],
-            mcq: [
-                /^(a\)|A\)|1\)|i\)|a\.\)|A\.)/
-            ],
-            essay: [
-                /^(write an essay|discuss in detail|elaborate on|give a detailed account)/i
-            ],
-            shortNote: [
-                /^(short note on|write briefly about|briefly explain)/i
-            ]
         };
 
         /**
@@ -1109,25 +1150,36 @@
             totalPages: 0,
             
             knowledgeBase: {
-                topics: new Map(),      // topic -> {count, icon, category}
-                questions: [],          // All extracted questions
-                content: {},            // Topic -> content mapping
-                searchIndex: {},         // Searchable word index
-                allText: '',            // Full searchable text
-                pageReferences: {}      // content -> page numbers
+                topics: new Map(),
+                questions: [],
+                content: {},
+                searchIndex: {},
+                allText: ''
             },
             
             examLevel: 'ms',
             interactionMode: 'text',
             selectedTopic: null,
             
-            isProcessing: false
+            apiKey: '',
+            apiReady: false,
+            isProcessing: false,
+            
+            // Viva Session State
+            vivaActive: false,
+            conversationHistory: [],
+            questionsAsked: 0,
+            marks: 0,
+            sessionStartTime: null
         };
 
         /**
          * DOM Elements
          */
         const DOM = {
+            apiKeyInput: document.getElementById('apiKeyInput'),
+            apiStatus: document.getElementById('apiStatus'),
+            
             uploadZone: document.getElementById('uploadZone'),
             fileInput: document.getElementById('fileInput'),
             fileList: document.getElementById('fileList'),
@@ -1148,16 +1200,30 @@
             modeVoice: document.getElementById('modeVoice'),
             
             tabs: document.querySelectorAll('.tab'),
-            tabContents: document.querySelectorAll('.tab-content'),
             
-            searchInput: document.getElementById('searchInput'),
+            vivaContent: document.getElementById('vivaContent'),
             extractedContent: document.getElementById('extractedContent'),
-            searchResults: document.getElementById('searchResults'),
             
             overviewTab: document.getElementById('overview')
         };
 
-        // ==================== EVENT LISTENERS ==================== 
+        // ==================== API KEY MANAGEMENT ==================== 
+
+        DOM.apiKeyInput.addEventListener('change', (e) => {
+            appState.apiKey = e.target.value.trim();
+            if (appState.apiKey) {
+                DOM.apiStatus.textContent = 'API Key Set ✓';
+                DOM.apiStatus.className = 'status-badge ready';
+                appState.apiReady = true;
+            } else {
+                DOM.apiStatus.textContent = 'No API Key';
+                DOM.apiStatus.className = 'status-badge pending';
+                appState.apiReady = false;
+            }
+            updateVivaReadiness();
+        });
+
+        // ==================== FILE UPLOAD HANDLERS ==================== 
 
         DOM.uploadZone.addEventListener('click', () => DOM.fileInput.click());
         DOM.fileInput.addEventListener('change', handleFileSelection);
@@ -1183,43 +1249,8 @@
             }
         });
 
-        DOM.examLevel.addEventListener('change', (e) => {
-            appState.examLevel = e.target.value;
-        });
-
-        DOM.modeText.addEventListener('change', () => {
-            appState.interactionMode = 'text';
-        });
-
-        DOM.modeVoice.addEventListener('change', () => {
-            appState.interactionMode = 'voice';
-        });
-
-        DOM.tabs.forEach(tab => {
-            tab.addEventListener('click', (e) => {
-                DOM.tabs.forEach(t => t.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                e.target.classList.add('active');
-                document.getElementById(e.target.dataset.tab).classList.add('active');
-            });
-        });
-
-        DOM.startVivaBtn.addEventListener('click', startViva);
-
-        DOM.searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.trim();
-            if (query.length > 0) {
-                performSearch(query);
-            } else {
-                DOM.searchResults.innerHTML = '';
-            }
-        });
-
-        // ==================== FILE HANDLING ==================== 
-
         async function handleFileSelection(event) {
             const files = Array.from(event.target.files);
-            
             if (files.length === 0) return;
 
             const validFiles = files.filter(file => {
@@ -1248,13 +1279,11 @@
             DOM.progressContainer.classList.remove('active');
 
             updateKnowledgeStatus();
-            enableExamControls();
-            displayExtractedContent();
+            updateVivaReadiness();
         }
 
         function updateFileList() {
             DOM.fileList.innerHTML = '';
-            
             appState.uploadedFiles.forEach((file, index) => {
                 const fileItem = document.createElement('div');
                 fileItem.className = 'file-item';
@@ -1271,12 +1300,11 @@
             appState.uploadedFiles.splice(index, 1);
             updateFileList();
             updateKnowledgeStatus();
+            updateVivaReadiness();
             
             if (appState.uploadedFiles.length === 0) {
                 disableExamControls();
                 DOM.extractedContent.innerHTML = '';
-                DOM.overviewTab.classList.add('active');
-                document.getElementById('extracted').classList.remove('active');
             }
         }
 
@@ -1286,7 +1314,7 @@
             return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
         }
 
-        // ==================== PDF PROCESSING & TEXT EXTRACTION ==================== 
+        // ==================== PDF PROCESSING ==================== 
 
         async function processPDFFiles(files) {
             const totalFiles = files.length;
@@ -1320,10 +1348,7 @@
                         for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
                             const page = await pdf.getPage(pageNum);
                             const textContent = await page.getTextContent();
-                            const pageText = textContent.items
-                                .map(item => item.str)
-                                .join(' ');
-                            
+                            const pageText = textContent.items.map(item => item.str).join(' ');
                             pages.push(pageText);
                             fullText += `\n--- PAGE ${pageNum} ---\n${pageText}`;
                         }
@@ -1346,10 +1371,7 @@
                     }
                 };
 
-                reader.onerror = () => {
-                    reject(new Error('File reading failed'));
-                };
-
+                reader.onerror = () => reject(new Error('File reading failed'));
                 reader.readAsArrayBuffer(file);
             });
         }
@@ -1359,7 +1381,7 @@
             DOM.progressText.textContent = `Processing: ${Math.round(percent)}%`;
         }
 
-        // ==================== KNOWLEDGE BASE INDEXING & QUESTION EXTRACTION ==================== 
+        // ==================== KNOWLEDGE BASE INDEXING ==================== 
 
         function indexKnowledgeBase() {
             appState.knowledgeBase.topics.clear();
@@ -1367,103 +1389,52 @@
             appState.knowledgeBase.searchIndex = {};
             appState.knowledgeBase.allText = '';
 
-            // Process each file
             appState.uploadedFiles.forEach(file => {
                 if (!file.isProcessed || !file.text) return;
-
-                // Aggregate all text
                 appState.knowledgeBase.allText += '\n' + file.text;
-
-                // Extract topics
-                extractTopicsFromText(file.text, file.name);
-
-                // Extract questions
+                extractTopicsFromText(file.text);
                 extractQuestionsFromText(file.text, file.name);
-
-                // Build search index
-                buildSearchIndex(file.text);
             });
 
-            // Deduplicate and sort questions
             appState.knowledgeBase.questions = Array.from(
                 new Map(appState.knowledgeBase.questions.map(q => [q.text, q])).values()
             );
-
-            console.log('Knowledge Base Indexed:', {
-                topics: appState.knowledgeBase.topics.size,
-                questions: appState.knowledgeBase.questions.length,
-                books: appState.booksLoaded
-            });
         }
 
-        function extractTopicsFromText(text, bookName) {
+        function extractTopicsFromText(text) {
             const lowerText = text.toLowerCase();
-            
             Object.entries(medicalTopics).forEach(([topic, data]) => {
                 if (lowerText.includes(topic.toLowerCase())) {
                     if (!appState.knowledgeBase.topics.has(topic)) {
                         appState.knowledgeBase.topics.set(topic, {
                             count: 0,
                             icon: data.icon,
-                            category: data.category,
-                            books: []
+                            category: data.category
                         });
                     }
-                    
                     const topicData = appState.knowledgeBase.topics.get(topic);
                     topicData.count++;
-                    if (!topicData.books.includes(bookName)) {
-                        topicData.books.push(bookName);
-                    }
                 }
             });
         }
 
         function extractQuestionsFromText(text, bookName) {
             const sentences = text.match(/[^.!?]*[.!?]+/g) || [];
-            
             sentences.forEach((sentence, index) => {
                 const trimmed = sentence.trim();
-                
-                // Identify question type
-                let type = 'viva';
-                if (trimmed.match(/^\d+\.\s*[a-d]\)|^\([a-d]\)/)) {
-                    type = 'mcq';
-                } else if (trimmed.match(/^(write an essay|discuss in detail)/i)) {
-                    type = 'essay';
-                } else if (trimmed.match(/^(short note|briefly)/i)) {
-                    type = 'shortNote';
-                }
-
-                // Check if sentence looks like a question
-                if (trimmed.match(/\?$|^(discuss|explain|what|how|why|when|where|name|list|enumerate|define)\s/i)) {
+                if (trimmed.match(/\?$|^(discuss|explain|what|how|why)/i)) {
                     if (trimmed.length > 15 && trimmed.length < 300) {
                         appState.knowledgeBase.questions.push({
                             text: trimmed,
-                            type: type,
-                            book: bookName,
-                            pageIndex: Math.floor(index / 10)
+                            type: 'viva',
+                            book: bookName
                         });
                     }
                 }
             });
         }
 
-        function buildSearchIndex(text) {
-            const words = text.split(/\s+/);
-            
-            words.forEach(word => {
-                const clean = word.toLowerCase().replace(/[^a-z0-9]/g, '');
-                if (clean.length > 3) {
-                    if (!appState.knowledgeBase.searchIndex[clean]) {
-                        appState.knowledgeBase.searchIndex[clean] = 0;
-                    }
-                    appState.knowledgeBase.searchIndex[clean]++;
-                }
-            });
-        }
-
-        // ==================== UI STATE MANAGEMENT ==================== 
+        // ==================== UI STATUS MANAGEMENT ==================== 
 
         function updateKnowledgeStatus() {
             DOM.booksLoaded.textContent = appState.booksLoaded;
@@ -1473,13 +1444,23 @@
             const isReady = appState.booksLoaded > 0 && appState.knowledgeBase.questions.length > 0;
             DOM.aiReady.textContent = isReady ? '✓' : '✗';
             DOM.aiReady.style.color = isReady ? '#16a34a' : '#999';
-            DOM.aiReady.parentElement.style.color = isReady ? '#16a34a' : '#999';
+        }
+
+        function updateVivaReadiness() {
+            const canStart = appState.booksLoaded > 0 && 
+                           appState.knowledgeBase.questions.length > 0 && 
+                           appState.apiReady;
+            
+            DOM.startVivaBtn.disabled = !canStart;
+            
+            if (canStart) {
+                enableExamControls();
+            }
         }
 
         function enableExamControls() {
             DOM.topicSelect.disabled = false;
             DOM.startVivaBtn.disabled = false;
-            DOM.searchInput.disabled = false;
             
             const topics = Array.from(appState.knowledgeBase.topics.keys()).slice(0, 5);
             DOM.topicSelect.placeholder = `e.g., ${topics.join(', ')}...`;
@@ -1488,186 +1469,246 @@
         function disableExamControls() {
             DOM.topicSelect.disabled = true;
             DOM.startVivaBtn.disabled = true;
-            DOM.searchInput.disabled = true;
         }
 
-        // ==================== DISPLAY EXTRACTED CONTENT ==================== 
+        // ==================== CLAUDE API INTEGRATION ==================== 
 
-        function displayExtractedContent() {
-            let html = '';
-
-            // Topics Section
-            if (appState.knowledgeBase.topics.size > 0) {
-                html += '<div class="content-section">';
-                html += '<div class="section-title">📌 Indexed Topics</div>';
-                html += '<div class="topic-grid">';
-                
-                Array.from(appState.knowledgeBase.topics.entries())
-                    .sort((a, b) => b[1].count - a[1].count)
-                    .slice(0, 20)
-                    .forEach(([topic, data]) => {
-                        html += `
-                            <div class="topic-card">
-                                <div class="topic-card-icon">${data.icon}</div>
-                                <div class="topic-card-name">${topic}</div>
-                                <div class="topic-card-count">${data.count} mentions</div>
-                            </div>
-                        `;
-                    });
-                
-                html += '</div></div>';
+        async function askClaude(userMessage) {
+            if (!appState.apiKey) {
+                return 'Error: API key not set. Please add your Claude API key in the header.';
             }
 
-            // Questions Section
-            if (appState.knowledgeBase.questions.length > 0) {
-                html += '<div class="content-section">';
-                html += `<div class="section-title">❓ Extracted Questions (${appState.knowledgeBase.questions.length})</div>`;
-                
-                // Group by type
-                const questionsByType = {};
-                appState.knowledgeBase.questions.forEach(q => {
-                    if (!questionsByType[q.type]) {
-                        questionsByType[q.type] = [];
-                    }
-                    questionsByType[q.type].push(q);
+            // Prepare context from PDFs
+            const pdfContext = appState.knowledgeBase.allText.substring(0, 15000); // Limit context
+
+            // Create system prompt
+            const systemPrompt = CONFIG.SYSTEM_PROMPT_TEMPLATE
+                .replace('{TOPIC}', appState.selectedTopic || 'General Surgery')
+                .replace('{LEVEL}', appState.examLevel)
+                .replace('{QUESTION_COUNT}', appState.questionsAsked)
+                .replace('{PDF_CONTEXT}', pdfContext);
+
+            // Build conversation history
+            const messages = appState.conversationHistory.map(msg => ({
+                role: msg.sender === 'student' ? 'user' : 'assistant',
+                content: msg.text
+            }));
+
+            // Add current message
+            messages.push({
+                role: 'user',
+                content: userMessage
+            });
+
+            try {
+                const response = await fetch(CONFIG.CLAUDE_API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'x-api-key': appState.apiKey,
+                        'anthropic-version': '2023-06-01',
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        model: CONFIG.MODEL,
+                        max_tokens: CONFIG.MAX_TOKENS,
+                        system: systemPrompt,
+                        messages: messages
+                    })
                 });
 
-                Object.entries(questionsByType).forEach(([type, questions]) => {
-                    const typeLabel = {
-                        'viva': '🎓 Viva Questions',
-                        'mcq': '📝 MCQ',
-                        'essay': '📄 Essay',
-                        'shortNote': '📋 Short Notes'
-                    }[type] || type;
+                if (!response.ok) {
+                    const error = await response.json();
+                    console.error('Claude API Error:', error);
+                    return `Error: ${error.error?.message || 'API request failed'}`;
+                }
 
-                    html += `<div style="margin-bottom: 2rem;">`;
-                    html += `<h3 style="margin-bottom: 1rem; color: #1e40af;">${typeLabel}</h3>`;
-                    
-                    questions.slice(0, 10).forEach(q => {
-                        html += `
-                            <div class="question-item">
-                                <div class="question-type">${type}</div>
-                                <div class="question-text">${escapeHtml(q.text)}</div>
-                                <div class="card-meta">📚 ${q.book}</div>
-                            </div>
-                        `;
-                    });
+                const data = await response.json();
+                return data.content[0].text;
 
-                    if (questions.length > 10) {
-                        html += `<p style="color: #999; font-size: 0.9rem; margin-top: 1rem;">... and ${questions.length - 10} more questions</p>`;
-                    }
-
-                    html += '</div>';
-                });
-
-                html += '</div>';
+            } catch (error) {
+                console.error('API Request Error:', error);
+                return `Error: ${error.message}`;
             }
-
-            DOM.extractedContent.innerHTML = html || '<p style="text-align: center; color: #999;">No content extracted</p>';
         }
 
-        // ==================== SEARCH FUNCTIONALITY ==================== 
+        // ==================== VIVA SESSION MANAGEMENT ==================== 
 
-        function performSearch(query) {
-            const lowerQuery = query.toLowerCase();
-            const results = [];
-
-            // Search in questions
-            appState.knowledgeBase.questions.forEach(q => {
-                if (q.text.toLowerCase().includes(lowerQuery)) {
-                    results.push({
-                        type: 'question',
-                        text: q.text,
-                        meta: `${q.type} • ${q.book}`,
-                        relevance: 1
-                    });
-                }
-            });
-
-            // Search in topics
-            appState.knowledgeBase.topics.forEach((data, topic) => {
-                if (topic.toLowerCase().includes(lowerQuery)) {
-                    results.push({
-                        type: 'topic',
-                        text: topic,
-                        icon: data.icon,
-                        meta: `${data.count} mentions • ${data.books.join(', ')}`,
-                        relevance: 0.9
-                    });
-                }
-            });
-
-            // Search in full text (limited)
-            const textMatches = appState.knowledgeBase.allText.toLowerCase().split('\n')
-                .filter(line => line.toLowerCase().includes(lowerQuery))
-                .slice(0, 5);
-
-            textMatches.forEach(match => {
-                if (match.length > 20 && match.length < 200) {
-                    results.push({
-                        type: 'text',
-                        text: match.trim(),
-                        meta: 'From PDFs',
-                        relevance: 0.7
-                    });
-                }
-            });
-
-            displaySearchResults(results, query);
-        }
-
-        function displaySearchResults(results, query) {
-            if (results.length === 0) {
-                DOM.searchResults.innerHTML = '<div class="empty-state"><p>No results found for "' + escapeHtml(query) + '"</p></div>';
+        async function startViva() {
+            if (!appState.apiReady) {
+                alert('⚠️ Please add your Claude API key first');
                 return;
             }
 
-            let html = `<div class="result-count">Found ${results.length} result(s)</div>`;
+            if (!appState.booksLoaded || appState.knowledgeBase.questions.length === 0) {
+                alert('⚠️ Please upload and process PDFs first');
+                return;
+            }
+
+            appState.selectedTopic = DOM.topicSelect.value || 'General Surgery';
+            appState.vivaActive = true;
+            appState.conversationHistory = [];
+            appState.questionsAsked = 0;
+            appState.sessionStartTime = new Date();
+
+            // Switch to viva tab
+            switchTab('viva');
+            renderVivaInterface();
+
+            // Get initial question from Claude
+            const initialPrompt = `Please start the viva examination. Ask the first question about ${appState.selectedTopic} suitable for a ${appState.examLevel} level candidate. Make it clear, specific, and based on the uploaded materials.`;
             
-            results.forEach((result, index) => {
-                if (result.type === 'topic') {
-                    html += `
-                        <div class="card">
-                            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">${result.icon}</div>
-                            <div class="card-title">${escapeHtml(result.text)}</div>
-                            <div class="card-meta">${escapeHtml(result.meta)}</div>
+            showLoadingMessage();
+            const response = await askClaude(initialPrompt);
+            
+            addMessage('examiner', response);
+            appState.conversationHistory.push({
+                sender: 'examiner',
+                text: response
+            });
+            appState.questionsAsked++;
+        }
+
+        function renderVivaInterface() {
+            const html = `
+                <div class="viva-container">
+                    <div class="viva-header">
+                        <div class="viva-title">🎓 Viva Examination</div>
+                        <div class="viva-info">
+                            <span>📚 Topic: ${appState.selectedTopic}</span>
+                            <span>📊 Level: ${appState.examLevel}</span>
+                            <span>❓ Questions: <span id="questionCount">${appState.questionsAsked}</span></span>
                         </div>
-                    `;
-                } else {
-                    html += `
-                        <div class="card">
-                            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
-                                <span class="badge">${result.type}</span>
-                            </div>
-                            <div class="card-text">${escapeHtml(result.text)}</div>
-                            <div class="card-meta">${escapeHtml(result.meta)}</div>
+                    </div>
+
+                    <div class="conversation" id="conversation"></div>
+
+                    <div class="input-section">
+                        <div class="input-group">
+                            <textarea id="studentAnswer" placeholder="Type your answer here..." rows="3"></textarea>
                         </div>
-                    `;
-                }
+                        <div class="button-group">
+                            <button class="btn-submit" id="submitBtn" onclick="submitAnswer()">Submit Answer</button>
+                            <button class="btn-end-viva" id="endVivaBtn" onclick="endViva()">End Viva</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            DOM.vivaContent.innerHTML = html;
+        }
+
+        function showLoadingMessage() {
+            const conv = document.getElementById('conversation');
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = 'message examiner';
+            loadingDiv.innerHTML = '<div class="loading"><div class="spinner"></div>AI Examiner is thinking...</div>';
+            conv.appendChild(loadingDiv);
+            conv.scrollTop = conv.scrollHeight;
+        }
+
+        function addMessage(sender, text) {
+            const conv = document.getElementById('conversation');
+            if (!conv) return;
+
+            // Remove loading message if exists
+            const loading = conv.querySelector('.loading');
+            if (loading) loading.parentElement.remove();
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            messageDiv.innerHTML = `
+                <div class="message-label">${sender === 'examiner' ? '🎓 Examiner' : '👨‍🎓 You'}</div>
+                <div class="message-text">${escapeHtml(text)}</div>
+                <div class="message-meta">${new Date().toLocaleTimeString()}</div>
+            `;
+            conv.appendChild(messageDiv);
+            conv.scrollTop = conv.scrollHeight;
+        }
+
+        async function submitAnswer() {
+            const textarea = document.getElementById('studentAnswer');
+            const answer = textarea.value.trim();
+
+            if (!answer) {
+                alert('Please type an answer');
+                return;
+            }
+
+            // Add student message
+            addMessage('student', answer);
+            appState.conversationHistory.push({
+                sender: 'student',
+                text: answer
             });
 
-            DOM.searchResults.innerHTML = html;
+            textarea.value = '';
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+
+            // Get examiner feedback
+            showLoadingMessage();
+            const response = await askClaude(answer);
+            
+            addMessage('examiner', response);
+            appState.conversationHistory.push({
+                sender: 'examiner',
+                text: response
+            });
+            appState.questionsAsked++;
+            
+            // Update question count
+            const qCount = document.getElementById('questionCount');
+            if (qCount) qCount.textContent = appState.questionsAsked;
+
+            submitBtn.disabled = false;
+            textarea.focus();
         }
 
-        // ==================== UTILITY FUNCTIONS ==================== 
+        function endViva() {
+            if (!confirm('Are you sure you want to end the viva session?')) return;
+            
+            appState.vivaActive = false;
+            const duration = Math.round((new Date() - appState.sessionStartTime) / 60000);
+            
+            alert(`✅ Viva Session Ended\n\nQuestions Asked: ${appState.questionsAsked}\nDuration: ${duration} minutes\n\nPhase 4 will add voice features and marking system.`);
+            
+            switchTab('overview');
+            DOM.vivaContent.innerHTML = '';
+        }
+
+        function switchTab(tabName) {
+            DOM.tabs.forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+            
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        DOM.tabs.forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                switchTab(e.target.dataset.tab);
+            });
+        });
+
+        DOM.examLevel.addEventListener('change', (e) => {
+            appState.examLevel = e.target.value;
+        });
+
+        DOM.modeText.addEventListener('change', () => {
+            appState.interactionMode = 'text';
+        });
+
+        DOM.modeVoice.addEventListener('change', () => {
+            appState.interactionMode = 'voice';
+        });
+
+        DOM.startVivaBtn.addEventListener('click', startViva);
+
+        // ==================== UTILITIES ==================== 
 
         function escapeHtml(text) {
-            const map = {
-                '&': '&amp;',
-                '<': '&lt;',
-                '>': '&gt;',
-                '"': '&quot;',
-                "'": '&#039;'
-            };
+            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
             return text.replace(/[&<>"']/g, m => map[m]);
-        }
-
-        function startViva() {
-            const topic = DOM.topicSelect.value || 'General Surgery';
-            const level = appState.examLevel;
-            const mode = appState.interactionMode;
-
-            alert(`✅ Viva Session Starting!\n\n📚 Topic: ${topic}\n📊 Level: ${level}\n🎤 Mode: ${mode}\n\nPhase 3 will add the AI integration.`);
         }
 
         // ==================== INITIALIZATION ==================== 
@@ -1678,7 +1719,7 @@
         }
 
         function initializeApp() {
-            console.log('🏥 Phase 2 Initialized: PDF Extraction & Knowledge Engine');
+            console.log('🏥 Phase 3 Initialized: AI Integration with Claude API');
             disableExamControls();
         }
 
